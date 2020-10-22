@@ -29,7 +29,9 @@ func Load(filePath string, v interface{}) error {
 		}
 
 		if len(kvMap[key]) != 0 {
-			setVal(kvMap[key], values.Field(i))
+			if err := setVal(kvMap[key], values.Field(i)); err != nil {
+				return err
+			}
 		}
 	}
 	return nil
